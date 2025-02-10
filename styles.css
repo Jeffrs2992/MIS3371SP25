@@ -1,0 +1,55 @@
+/*
+Program name: styles.css
+Author: Japheth Silva
+Date created: 2025-02-09
+Date last edited: 2025-02-09
+Version: 1.0
+Description: CSS for Patient Registration Form for Pawsitive Medicine (Homework 1)
+
+/* Background */
+body {
+    background-color: #D1E0E0; 
+    font-family: 'Times New Roman', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #00A9E0; /* Oiler Blue */
+}
+
+/* Headings */
+h1, h2, h3 {
+    font-family: 'Times New Roman', serif; /* Clean, modern font */
+    color: #E50000; /* UH Red for headings */
+}
+
+/* Change the color, font, and size of the legend (headings) */
+legend {
+    color: #003B5C;  /* Set color (example: UH Blue or your choice) */
+    font-size: 18px;  /* Set font size */
+    font-family: 'Times New Roman', serif;  /* Set font family */
+    font-weight: bold;  /* Optional: make the text bold */
+}
+
+/* Body Text */
+p, li {
+    font-family: 'Times New Roman', sans-serif; 
+    font-size: 18px;
+    color: #00A9E0; 
+}
+
+/* Footer */
+footer {
+    background-color: #003D73; 
+    color: #FFF; 
+    padding: 10px;
+    text-align: center;
+}
+
+/* Hyperlinks */
+a {
+    color: #E50000; 
+    text-decoration: none;
+}
+
+a:visited {
+    color: #8B0000; 
+}
