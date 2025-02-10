@@ -29,10 +29,8 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 1)
         <p id="currentDate" style="font-size: 1.2em; margin-top: 10px;"></p> <!-- Added style for better spacing -->
     </header>
 
-
     <!-- Main Form -->
     <form action="submit-form.php" method="POST">
-
 
         <!-- Personal Information -->
         <fieldset>
@@ -147,21 +145,20 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 1)
             <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890">
         </fieldset>
 
-
-        <!-- Marital Status -->
+        <!-- Additional Identification Information-->
         <fieldset>
+            <legend>Additional Information</legend>
+            
+        <!-- Marital Status -->
             <label>Marital Status:</label><br>
             <input type="radio" id="single" name="marital_status" value="Single" required>
             <label for="single">Single</label><br>
 
-
             <input type="radio" id="married" name="marital_status" value="Married">
             <label for="married">Married</label><br>
 
-
             <input type="radio" id="divorced" name="marital_status" value="Divorced">
             <label for="divorced">Divorced</label><br>
-
 
             <input type="radio" id="widowed" name="marital_status" value="Widowed">
             <label for="widowed">Widowed</label><br><br>
@@ -172,14 +169,11 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 1)
             <input type="radio" id="citizen" name="immigration_status" value="Citizen" required>
             <label for="citizen">U.S. Citizen</label><br>
 
-
             <input type="radio" id="permanent_resident" name="immigration_status" value="Permanent Resident">
             <label for="permanent_resident">Permanent Resident</label><br>
 
-
             <input type="radio" id="visa_holder" name="immigration_status" value="Visa Holder">
             <label for="visa_holder">Visa Holder</label><br>
-
 
             <input type="radio" id="other" name="immigration_status" value="Other">
             <label for="other">Other</label><br><br>
@@ -190,55 +184,43 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 1)
             <input type="radio" id="white" name="race" value="White" required>
             <label for="white">White</label><br>
 
-
             <input type="radio" id="black" name="race" value="Black">
             <label for="black">Black or African American</label><br>
-
 
             <input type="radio" id="asian" name="race" value="Asian">
             <label for="asian">Asian</label><br>
 
-
             <input type="radio" id="native" name="race" value="Native American">
             <label for="native">American Indian or Alaska Native</label><br>
 
-
             <input type="radio" id="pacific" name="race" value="Pacific Islander">
             <label for="pacific">Native Hawaiian or Other Pacific Islander</label><br>
-
 
             <input type="radio" id="two_or_more" name="race" value="Two or More Races">
             <label for="two_or_more">Two or More Races</label><br><br>
         </fieldset>
 
-
         <!-- Vaccination History Section -->
         <fieldset>
-            <legend>Vaccination History (Last 10 Years)</legend>
+            <legend>Vaccination History</legend>
             <label>Select all the vaccines you have received in the past 10 years:</label><br>
            
             <input type="checkbox" id="covid19" name="vaccines" value="COVID-19">
             <label for="covid19">COVID-19</label><br>
 
-
             <input type="checkbox" id="flu" name="vaccines" value="Influenza">
             <label for="flu">Influenza (Flu)</label><br>
-
 
             <input type="checkbox" id="tetanus" name="vaccines" value="Tetanus">
             <label for="tetanus">Tetanus (Td/Tdap)</label><br>
 
-
             <input type="checkbox" id="mmr" name="vaccines" value="MMR">
             <label for="mmr">Measles, Mumps, and Rubella (MMR)</label><br>
-
 
             <input type="checkbox" id="hepatitisb" name="vaccines" value="Hepatitis B">
             <label for="hepatitisb">Hepatitis B</label><br>
         </fieldset>
 
-
-       
         <!-- UserID -->
         <fieldset>
             <legend>Account Setup</legend>
@@ -248,7 +230,6 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 1)
         <!-- Password Field -->
             <label for="password">Password:</label><br>
             <input type="password" id="password" name="password" required><br><br>
-
 
         <!-- Confirm Password Field -->
             <label for="confirm_password">Re-enter Password:</label><br>
