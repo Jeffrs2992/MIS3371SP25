@@ -25,8 +25,9 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 1)
 <body onload="displayDate()">
     <!-- Main header section -->
     <header>
+        <img src="Images/cougarpaw.jpg" alt="Cougar Paw Logo" class="cougarpaw">
         <h1>Pawsitive Medicine Patient Registration Form</h1>
-        <p id="currentDate" style="font-size: 1.2em; margin-top: 10px;"></p> <!-- Added style for better spacing -->
+        <p id="currentDate"></p>
     </header>
 
     <!-- Main Form -->
@@ -220,6 +221,19 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 1)
             <label for="hepatitisb">Hepatitis B</label><br>
         </fieldset>
 
+        <!-- Current Satisfaction with Provider -->
+         <fieldset>
+        <div class="slider-container">
+            <legend for="satisfaction-slider">Satisfaction with Current Provider:</legend><br>
+            <input type="range" id="satisfaction-slider" name="satisfaction" min="0" max="100" value="50" class="slider">
+            <div class="slider-labels">
+              <span>Very Dissatisfied</span>
+              <span>Satisfied</span>
+              <span>Very Satisfied</span>
+            </div>
+          </div>
+        </fieldset>
+          
         <!-- UserID -->
         <fieldset>
             <legend>Account Setup</legend>
@@ -255,9 +269,9 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 1)
             </div>
             <div class="footer-section">
                 <strong>Follow Us</strong> <br>
-                <a href="#"><img src="fb-icon.png" alt="Facebook" width="20"></a>
-                <a href="#"><img src="twitter-icon.png" alt="Twitter" width="20"></a>
-                <a href="#"><img src="instagram-icon.png" alt="Instagram" width="20"></a>
+                <a href="#"><img src="Images/facebooklogo.png" alt="Facebook" width="30"></a>
+                <a href="#"><img src="Images/twitterlogo.png" alt="Twitter" width="30"></a>
+                <a href="#"><img src="Images/isntagramlogo.png" alt="Instagram" width="30"></a>
             </div>
         </div>
     </footer>

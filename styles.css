@@ -16,17 +16,30 @@ body {
 }
 
 /* Headings */
-h1, h2, h3 {
-    font-family: 'Times New Roman', serif; /* Clean, modern font */
-    color: #E50000; /* UH Red for headings */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-/* Change the color, font, and size of the legend (headings) */
+.cougarpaw {
+    display: block;
+    width: 120px; 
+    height: auto;
+}
+
+header h1 {
+    font-family: 'Times New Roman', serif; 
+    color: #E50000; 
+}
+
+/* Legends */
 legend {
-    color: #003B5C;  /* Set color (example: UH Blue or your choice) */
-    font-size: 18px;  /* Set font size */
-    font-family: 'Times New Roman', serif;  /* Set font family */
-    font-weight: bold;  /* Optional: make the text bold */
+    color: #003B5C; 
+    font-size: 18px;  
+    font-family: 'Times New Roman', serif; 
+    font-weight: bold; 
 }
 
 /* Body Text */
@@ -35,6 +48,38 @@ p, li {
     font-size: 18px;
     color: #00A9E0; 
 }
+
+/* Slider */
+
+  .slider {
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 14px;
+  }
+  
+  .slider-labels span {
+    width: 33%;
+    text-align: center;
+  }
+  
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: #ffffff;
+    outline: none;
+    border-radius: 5px;
+  }
+  
+  input[type="range"]:focus {
+    background: #ffffff;
+  }  
 
 /* Footer */
 footer {
