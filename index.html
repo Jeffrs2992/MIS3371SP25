@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-Program name: patient-form.html
+Program name: index.html
 Author: Japheth Silva
 Date created: 2025-02-09
 Date last edited: 2025-02-09
@@ -31,7 +31,7 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 1)
     </header>
 
     <!-- Main Form -->
-    <form action="submit-form.php" method="POST">
+    <form action="thank-you.html" method="POST">
 
         <!-- Personal Information -->
         <fieldset>
@@ -60,7 +60,7 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 1)
             <input type="date" id="dob" name="dob" required>
            
             <label for="ssn">Social Security Number:</label>
-            <input type="text" id="ssn" name="ssn" maxlength="11" placeholder="XXX-XX-XXXX" required>
+            <input type="text" id="ssn" name="ssn" maxlength="9" placeholder="XXX-XX-XXXX" required>
         </fieldset>
        
         <!-- Address Section -->
@@ -143,7 +143,7 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 1)
             <input type="email" id="email" name="email" required>
            
             <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890">
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="XXX-XXX-XXXX">
         </fieldset>
 
         <!-- Additional Identification Information-->
@@ -247,8 +247,28 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 1)
         <!-- Confirm Password Field -->
             <label for="confirm_password">Re-enter Password:</label><br>
             <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+
+        <!-- Message to show when passwords don't match -->
+            <p id="error-message" style="color: red; display: none;">Passwords do not match!</p>
+
+            <script>
+                const form = document.querySelector("form");  // Replace with your form selector
+                const errorMessage = document.getElementById("error-message");  // The error message element
+
+                form.addEventListener("submit", function(event) {
+                    const password = document.getElementById("password").value;
+                    const confirmPassword = document.getElementById("confirm_password").value;
+
+                    if (password !== confirmPassword) {
+                        errorMessage.style.display = "block";  // Show the error message
+                        event.preventDefault();  // Prevent form submission
+                    } else {
+                        errorMessage.style.display = "none";  // Hide the error message if passwords match
+                    }
+                });
+            </script>
         </fieldset>
-       
+
         <!-- Buttons -->
         <button type="reset">Reset</button>
         <button type="submit">Submit</button>
