@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<!--
+Program name: index.html
+Author: Japheth Silva
+Date created: 2025-02-09
+Date last edited: 2025-02-09
+Version: 1.0
+Description: Patient Registration Form for Pawsitive Medicine (Homework 1)
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Registration Form - Homework 1</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Function to display the current date dynamically
+        function displayDate() {
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById("currentDate").innerText = "Today's date is: " + today.toLocaleDateString('en-US', options);
+        }
+    </script>    
+</head>
+<body onload="displayDate()">
+    <!-- Main header section -->
+    <header>
+        <img src="Logos/cougarpaw.jpg" alt="Cougar Paw Logo" class="cougarpaw">
+        <h1>Pawsitive Medicine Patient Registration Form</h1>
+        <p id="currentDate"></p>
+    </header>
+
+    <!-- Main Form -->
+    <form action="thank-you.html" method="POST">
+
+        <!-- Personal Information -->
+        <fieldset>
+            <legend>Personal Information</legend>
+           
+            <label for="title">Title:</label>
+            <select id="title" name="title" required>
+                <option value="">Select</option>
+                <option value="Mr">Mr.</option>
+                <option value="Mrs">Mrs.</option>
+                <option value="Ms">Ms.</option>
+                <option value="Miss">Miss</option>
+                <option value="Dr">Dr.</option>
+            </select>
+           
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" maxlength="30" required>
+           
+            <label for="middleInitial">Middle Initial:</label>
+            <input type="text" id="middleInitial" name="middleInitial" maxlength="1" style="width: 20px;">
+           
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" maxlength="30" required><br>
+           
+            <label for="dob">Date of Birth (MM/DD/YYYY):</label>
+            <input type="date" id="dob" name="dob" required>
+           
+            <label for="ssn">Social Security Number:</label>
+            <input type="text" id="ssn" name="ssn" maxlength="9" placeholder="XXX-XX-XXXX" required>
+        </fieldset>
+       
+        <!-- Address Section -->
+        <fieldset>
+            <legend>Mailing Information</legend>
+            <label for="address">Address Line:</label>
+            <input type="text" id="address" name="address" maxlength="30" required><br>
+           
+            <label for="address2">Address Line 2 (optional):</label>
+            <input type="text" id="address2" name="address2" maxlength="30" placeholder="Apt, Suite, etc."><br>
+           
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" maxlength="30" required>
+           
+            <label for="state">State:</label>
+            <select id="state" name="state" required>
+                <option value="">Select a State</option>
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AZ">AZ</option>
+                <option value="AR">AR</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="D.C.">D.C.</option>
+                <option value="DE">DE</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="IA">IA</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="ME">ME</option>
+                <option value="MD">MD</option>
+                <option value="MA">MA</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MS">MS</option>
+                <option value="MO">MO</option>
+                <option value="MT">MT</option>
+                <option value="NE">NE</option>
+                <option value="NV">NV</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>
+                <option value="NY">NY</option>
+                <option value="NC">NC</option>
+                <option value="ND">ND</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="PR">PR</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VT">VT</option>
+                <option value="VA">VA</option>
+                <option value="WA">WA</option>
+                <option value="WV">WV</option>
+                <option value="WI">WI</option>
+                <option value="WY">WY</option>
+            </select>
+           
+            <label for="zip">Zip Code:</label>
+            <input type="text" id="zip" name="zip" maxlength="10" pattern=".{5,10}" required title="Zip Code must be between 5 to 10 characters">
+        </fieldset>
+       
+        <!-- Contact Information -->
+        <fieldset>
+            <legend>Contact Information</legend>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+           
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="XXX-XXX-XXXX">
+        </fieldset>
+
+        <!-- Additional Identification Information-->
+        <fieldset>
+            <legend>Additional Information</legend>
+            
+        <!-- Marital Status -->
+            <label>Marital Status:</label><br>
+            <input type="radio" id="single" name="marital_status" value="Single" required>
+            <label for="single">Single</label><br>
+
+            <input type="radio" id="married" name="marital_status" value="Married">
+            <label for="married">Married</label><br>
+
+            <input type="radio" id="divorced" name="marital_status" value="Divorced">
+            <label for="divorced">Divorced</label><br>
+
+            <input type="radio" id="widowed" name="marital_status" value="Widowed">
+            <label for="widowed">Widowed</label><br><br>
+
+
+            <!-- Immigration Status -->
+            <label>Immigration Status:</label><br>
+            <input type="radio" id="citizen" name="immigration_status" value="Citizen" required>
+            <label for="citizen">U.S. Citizen</label><br>
+
+            <input type="radio" id="permanent_resident" name="immigration_status" value="Permanent Resident">
+            <label for="permanent_resident">Permanent Resident</label><br>
+
+            <input type="radio" id="visa_holder" name="immigration_status" value="Visa Holder">
+            <label for="visa_holder">Visa Holder</label><br>
+
+            <input type="radio" id="other" name="immigration_status" value="Other">
+            <label for="other">Other</label><br><br>
+
+            <!-- Race -->
+            <label>Race:</label><br>
+            <input type="radio" id="white" name="race" value="White" required>
+            <label for="white">White</label><br>
+
+            <input type="radio" id="black" name="race" value="Black">
+            <label for="black">Black or African American</label><br>
+
+            <input type="radio" id="asian" name="race" value="Asian">
+            <label for="asian">Asian</label><br>
+
+            <input type="radio" id="native" name="race" value="Native American">
+            <label for="native">American Indian or Alaska Native</label><br>
+
+            <input type="radio" id="pacific" name="race" value="Pacific Islander">
+            <label for="pacific">Native Hawaiian or Other Pacific Islander</label><br>
+
+            <input type="radio" id="two_or_more" name="race" value="Two or More Races">
+            <label for="two_or_more">Two or More Races</label><br><br>
+        </fieldset>
+
+        <!-- Vaccination History Section -->
+        <fieldset>
+            <legend>Vaccination History</legend>
+            <label>Select all the vaccines you have received in the past 10 years:</label><br>
+           
+            <input type="checkbox" id="covid19" name="vaccines" value="COVID-19">
+            <label for="covid19">COVID-19</label><br>
+
+            <input type="checkbox" id="flu" name="vaccines" value="Influenza">
+            <label for="flu">Influenza (Flu)</label><br>
+
+            <input type="checkbox" id="tetanus" name="vaccines" value="Tetanus">
+            <label for="tetanus">Tetanus (Td/Tdap)</label><br>
+
+            <input type="checkbox" id="mmr" name="vaccines" value="MMR">
+            <label for="mmr">Measles, Mumps, and Rubella (MMR)</label><br>
+
+            <input type="checkbox" id="hepatitisb" name="vaccines" value="Hepatitis B">
+            <label for="hepatitisb">Hepatitis B</label><br>
+        </fieldset>
+
+        <!-- Current Satisfaction with Provider -->
+         <fieldset>
+        <div class="slider-container">
+            <legend for="satisfaction-slider">Satisfaction with Current Provider:</legend><br>
+            <input type="range" id="satisfaction-slider" name="satisfaction" min="0" max="100" value="50" class="slider">
+            <div class="slider-labels">
+              <span>Very Dissatisfied</span>
+              <span>Satisfied</span>
+              <span>Very Satisfied</span>
+            </div>
+          </div>
+        </fieldset>
+          
+        <!-- UserID -->
+        <fieldset>
+            <legend>Account Setup</legend>
+            <label for="userID">User ID:</label><br>
+            <input type="text" id="userID" name="userID" maxlength="20" required><br><br>
+           
+        <!-- Password Field -->
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br><br>
+
+        <!-- Confirm Password Field -->
+            <label for="confirm_password">Re-enter Password:</label><br>
+            <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+
+        <!-- Message to show when passwords don't match -->
+            <p id="error-message" style="color: red; display: none;">Passwords do not match!</p>
+
+            <script>
+                const form = document.querySelector("form");  // Replace with your form selector
+                const errorMessage = document.getElementById("error-message");  // The error message element
+
+                form.addEventListener("submit", function(event) {
+                    const password = document.getElementById("password").value;
+                    const confirmPassword = document.getElementById("confirm_password").value;
+
+                    if (password !== confirmPassword) {
+                        errorMessage.style.display = "block";  // Show the error message
+                        event.preventDefault();  // Prevent form submission
+                    } else {
+                        errorMessage.style.display = "none";  // Hide the error message if passwords match
+                    }
+                });
+            </script>
+        </fieldset>
+
+        <!-- Buttons -->
+        <button type="reset">Reset</button>
+        <button type="submit">Submit</button>
+    </form>
+   
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <strong>Pawsitive Medicine</strong> <br>
+                PO BOX 41959 <br>
+                Hooston, TX 77419
+            </div>
+            <div class="footer-section">
+                <strong>CONTACT US</strong> <br>
+                <a href="contact@pawsitivemedicine.org">contact@pawsitivemedicine.org</a> <br>
+                (281) 419-5959
+            </div>
+            <div class="footer-section">
+                <strong>Follow Us</strong> <br>
+                <a href="#"><img src="Logos/facebooklogo.png" alt="Facebook" width="30"></a>
+                <a href="#"><img src="Logos/twitterlogo.png" alt="Twitter" width="30"></a>
+                <a href="#"><img src="Logos/isntagramlogo.png" alt="Instagram" width="30"></a>
+            </div>
+        </div>
+    </footer>
+   
+</body>
+</html>
