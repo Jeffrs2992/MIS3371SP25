@@ -2,27 +2,21 @@
 <!--
 Program name: index.html
 Author: Japheth Silva
-Date created: 2025-02-09
-Date last edited: 2025-02-09
+Date created: 2025-03-09
+Date last edited: 2025-03-09
 Version: 1.0
-Description: Patient Registration Form for Pawsitive Medicine (Homework 1)
+Description: Patient Registration Form for Pawsitive Medicine (Homework 2)
 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Registration Form - Homework 1</title>
+    <title>Patient Registration Form - Homework 2</title>
     <link rel="stylesheet" href="styles.css">
-    <script>
-        // Function to display the current date dynamically
-        function displayDate() {
-            const today = new Date();
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById("currentDate").innerText = "Today's date is: " + today.toLocaleDateString('en-US', options);
-        }
-    </script>    
+    <script src="scripts.js" defer></script>
 </head>
 <body onload="displayDate()">
+
     <!-- Main header section -->
     <header>
         <img src="Logos/cougarpaw.jpg" alt="Cougar Paw Logo" class="cougarpaw">
@@ -36,105 +30,196 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 1)
         <!-- Personal Information -->
         <fieldset>
             <legend>Personal Information</legend>
-           
-            <label for="title">Title:</label>
-            <select id="title" name="title" required>
-                <option value="">Select</option>
-                <option value="Mr">Mr.</option>
-                <option value="Mrs">Mrs.</option>
-                <option value="Ms">Ms.</option>
-                <option value="Miss">Miss</option>
-                <option value="Dr">Dr.</option>
-            </select>
-           
-            <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" maxlength="30" required>
-           
-            <label for="middleInitial">Middle Initial:</label>
-            <input type="text" id="middleInitial" name="middleInitial" maxlength="1" style="width: 20px;">
-           
-            <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" maxlength="30" required><br>
-           
-            <label for="dob">Date of Birth (MM/DD/YYYY):</label>
-            <input type="date" id="dob" name="dob" required>
-           
-            <label for="ssn">Social Security Number:</label>
-            <input type="text" id="ssn" name="ssn" maxlength="9" placeholder="XXX-XX-XXXX" required>
-        </fieldset>
+            <table>
+                <tr>
+                    <td><label for="title">Title:</label></td>
+                    <td>
+                        <select id="title" name="title" required>
+                            <option value="">Select</option>
+                            <option value="Mr">Mr.</option>
+                            <option value="Mrs">Mrs.</option>
+                            <option value="Ms">Ms.</option>
+                            <option value="Miss">Miss</option>
+                            <option value="Dr">Dr.</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="firstName">First Name:</label></td>
+                    <td>
+                        <input type="text" 
+                               id="firstName" 
+                               name="firstName" 
+                               placeholder="Required"
+                               title="Enter your first name (Must contain 1-30 characters. Letters, apostrophes, and dashes only)"  
+                               minlength="1"
+                               maxlength="30" 
+                               pattern="[A-Za-z'-]{1,30}"
+                               oninvalid="this.setCustomValidity('Invalid first name. Please enter 1-30 characters with letters, apostrophes, and dashes only.')"
+                               oninput="this.setCustomValidity('')"
+                               onblur="validateFirstname()"
+                               required>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="middleInitial">Middle Initial:</label></td>
+                    <td>
+                        <input type="text" 
+                               id="middleInitial" 
+                               name="middleInitial" 
+                               title="Enter your middle initial (single uppercase letter)" 
+                               maxlength="1"
+                               pattern="[A-Za-z]"
+                               oninvalid="this.setCustomValidity('Invalid middle initial. Please enter a single uppercase letter.')"
+                               oninput="this.setCustomValidity('')"
+                               onblur="validateMiddleInitial()"  
+                               style="width: 20px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="lastName">Last Name:</label></td>
+                    <td>
+                        <input type="text" 
+                               id="lastName" 
+                               name="lastName"
+                               placeholder="Required" 
+                               title="Enter your last name (max of 30 characters)" 
+                               maxlength="30"
+                               pattern="[A-Za-z'-]{1,30}"
+                               oninvalid="this.setCustomValidity('Invalid last name.')"  
+                               oninput="this.setCustomValidity('')"
+                               onblur="validateLastname()"
+                               required>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="dob">Date of Birth (MM/DD/YYYY):</label></td>
+                    <td>
+                        <input type="date" 
+                               id="dob" 
+                               name="dob" 
+                               title="Enter your date of birth (MM/DD/YYYY)" 
+                               onblur="validateDOB()"
+                               required>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="ssn">Social Security Number:</label></td>
+                    <td>
+                        <input type="password" 
+                               id="ssn" 
+                               name="ssn" 
+                               title="Enter your social security number (XXX-XX-XXXX)"
+                               minlength="9"
+                               maxlength="9" 
+                               pattern="\d{9}"
+                               placeholder="XXX-XX-XXXX" 
+                               required>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>        
        
         <!-- Address Section -->
         <fieldset>
             <legend>Mailing Information</legend>
-            <label for="address">Address Line:</label>
-            <input type="text" id="address" name="address" maxlength="30" required><br>
-           
-            <label for="address2">Address Line 2 (optional):</label>
-            <input type="text" id="address2" name="address2" maxlength="30" placeholder="Apt, Suite, etc."><br>
-           
-            <label for="city">City:</label>
-            <input type="text" id="city" name="city" maxlength="30" required>
-           
-            <label for="state">State:</label>
-            <select id="state" name="state" required>
-                <option value="">Select a State</option>
-                <option value="AL">AL</option>
-                <option value="AK">AK</option>
-                <option value="AZ">AZ</option>
-                <option value="AR">AR</option>
-                <option value="CA">CA</option>
-                <option value="CO">CO</option>
-                <option value="CT">CT</option>
-                <option value="D.C.">D.C.</option>
-                <option value="DE">DE</option>
-                <option value="FL">FL</option>
-                <option value="GA">GA</option>
-                <option value="HI">HI</option>
-                <option value="ID">ID</option>
-                <option value="IL">IL</option>
-                <option value="IN">IN</option>
-                <option value="IA">IA</option>
-                <option value="KS">KS</option>
-                <option value="KY">KY</option>
-                <option value="LA">LA</option>
-                <option value="ME">ME</option>
-                <option value="MD">MD</option>
-                <option value="MA">MA</option>
-                <option value="MI">MI</option>
-                <option value="MN">MN</option>
-                <option value="MS">MS</option>
-                <option value="MO">MO</option>
-                <option value="MT">MT</option>
-                <option value="NE">NE</option>
-                <option value="NV">NV</option>
-                <option value="NH">NH</option>
-                <option value="NJ">NJ</option>
-                <option value="NM">NM</option>
-                <option value="NY">NY</option>
-                <option value="NC">NC</option>
-                <option value="ND">ND</option>
-                <option value="OH">OH</option>
-                <option value="OK">OK</option>
-                <option value="OR">OR</option>
-                <option value="PA">PA</option>
-                <option value="PR">PR</option>
-                <option value="RI">RI</option>
-                <option value="SC">SC</option>
-                <option value="SD">SD</option>
-                <option value="TN">TN</option>
-                <option value="TX">TX</option>
-                <option value="UT">UT</option>
-                <option value="VT">VT</option>
-                <option value="VA">VA</option>
-                <option value="WA">WA</option>
-                <option value="WV">WV</option>
-                <option value="WI">WI</option>
-                <option value="WY">WY</option>
-            </select>
-           
-            <label for="zip">Zip Code:</label>
-            <input type="text" id="zip" name="zip" maxlength="10" pattern=".{5,10}" required title="Zip Code must be between 5 to 10 characters">
-        </fieldset>
+            <table>
+                <tr>
+                    <td><label for="address">Address Line:</label></td>
+                    <td><input type="text" 
+                               id="address" 
+                               name="address" 
+                               maxlength="30" 
+                               required></td>
+                </tr>
+                <tr>
+                    <td><label for="address2">Address Line 2 (optional):</label></td>
+                    <td><input type="text" 
+                               id="address2" 
+                               name="address2" 
+                               maxlength="30" 
+                               placeholder="Apt, Suite, etc."></td>
+                </tr>
+                <tr>
+                    <td><label for="city">City:</label></td>
+                    <td><input type="text" 
+                               id="city" 
+                               name="city" 
+                               maxlength="30" 
+                               required></td>
+                </tr>
+                <tr>
+                    <td><label for="state">State:</label></td>
+                    <td>
+                        <select id="state" name="state" required>
+                            <option value="">Select a State</option>
+                            <option value="AL">AL</option>
+                            <option value="AK">AK</option>
+                            <option value="AZ">AZ</option>
+                            <option value="AR">AR</option>
+                            <option value="CA">CA</option>
+                            <option value="CO">CO</option>
+                            <option value="CT">CT</option>
+                            <option value="D.C.">D.C.</option>
+                            <option value="DE">DE</option>
+                            <option value="FL">FL</option>
+                            <option value="GA">GA</option>
+                            <option value="HI">HI</option>
+                            <option value="ID">ID</option>
+                            <option value="IL">IL</option>
+                            <option value="IN">IN</option>
+                            <option value="IA">IA</option>
+                            <option value="KS">KS</option>
+                            <option value="KY">KY</option>
+                            <option value="LA">LA</option>
+                            <option value="ME">ME</option>
+                            <option value="MD">MD</option>
+                            <option value="MA">MA</option>
+                            <option value="MI">MI</option>
+                            <option value="MN">MN</option>
+                            <option value="MS">MS</option>
+                            <option value="MO">MO</option>
+                            <option value="MT">MT</option>
+                            <option value="NE">NE</option>
+                            <option value="NV">NV</option>
+                            <option value="NH">NH</option>
+                            <option value="NJ">NJ</option>
+                            <option value="NM">NM</option>
+                            <option value="NY">NY</option>
+                            <option value="NC">NC</option>
+                            <option value="ND">ND</option>
+                            <option value="OH">OH</option>
+                            <option value="OK">OK</option>
+                            <option value="OR">OR</option>
+                            <option value="PA">PA</option>
+                            <option value="PR">PR</option>
+                            <option value="RI">RI</option>
+                            <option value="SC">SC</option>
+                            <option value="SD">SD</option>
+                            <option value="TN">TN</option>
+                            <option value="TX">TX</option>
+                            <option value="UT">UT</option>
+                            <option value="VT">VT</option>
+                            <option value="VA">VA</option>
+                            <option value="WA">WA</option>
+                            <option value="WV">WV</option>
+                            <option value="WI">WI</option>
+                            <option value="WY">WY</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="zip">Zip Code:</label></td>
+                    <td><input type="text" 
+                               id="zip" 
+                               name="zip" 
+                               title="Zip Code must be between 5 to 10 characters"
+                               maxlength="10" 
+                               pattern=".{5,10}" 
+                               required></td>
+                </tr>
+            </table>
+        </fieldset>        
        
         <!-- Contact Information -->
         <fieldset>
