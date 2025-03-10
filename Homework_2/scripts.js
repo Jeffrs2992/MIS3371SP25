@@ -44,10 +44,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         // Validate the input date:
         if (inputDate > currentDate) {
-            alert("The date of birth cannot be in the future.");
             dobInput.setCustomValidity("The date of birth cannot be in the future.");
         } else if (inputDate < minBirthDate) {
-            alert("The date of birth cannot be more than 120 years ago.");
             dobInput.setCustomValidity("The date of birth cannot be more than 120 years ago.");
         } else {
             dobInput.setCustomValidity(""); // Reset custom validity if the date is valid
@@ -152,5 +150,66 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
     document.getElementById("confirm_password").addEventListener("input", function() {
         errorMessage.style.display = "none";
+    });
+
+    document.querySelector('button[type="review"]').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the form from submitting immediately
+        
+        // Get the values of all the fields
+        const title = document.getElementById('title').value;
+        const firstName = document.getElementById('firstName').value;
+        const middleInitial = document.getElementById('middleInitial').value;
+        const lastName = document.getElementById('lastName').value;
+        const dob = document.getElementById('dob').value;
+        const ssn = document.getElementById('ssn').value;
+        const address = document.getElementById('address').value;
+        const address2 = document.getElementById('address2').value;
+        const city = document.getElementById('city').value;
+        const state = document.getElementById('state').value;
+        const zip = document.getElementById('zip').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+    
+        // Get the selected marital status
+        let maritalStatus = document.querySelector('input[name="marital_status"]:checked');
+        maritalStatus = maritalStatus ? maritalStatus.value : "Not specified";
+    
+        // Get the selected immigration status
+        let immigrationStatus = document.querySelector('input[name="immigration_status"]:checked');
+        immigrationStatus = immigrationStatus ? immigrationStatus.value : "Not specified";
+    
+        // Get the selected race
+        let race = document.querySelector('input[name="race"]:checked');
+        race = race ? race.value : "Not specified";
+    
+        // Get the selected vaccines
+        let vaccines = [];
+        document.querySelectorAll('input[name="vaccines"]:checked').forEach(function(checkbox) {
+            vaccines.push(checkbox.value);
+        });
+        
+        // Create a string with all the data to display
+        let confirmationMessage = `
+            <h3>Please review your information:</h3>
+            <p><strong>Title:</strong> ${title}</p>
+            <p><strong>First Name:</strong> ${firstName}</p>
+            <p><strong>Middle Initial:</strong> ${middleInitial}</p>
+            <p><strong>Last Name:</strong> ${lastName}</p>
+            <p><strong>Date of Birth:</strong> ${dob}</p>
+            <p><strong>Social Security Number:</strong> ${ssn}</p>
+            <p><strong>Address:</strong> ${address} ${address2 ? ', ' + address2 : ''}</p>
+            <p><strong>City:</strong> ${city}</p>
+            <p><strong>State:</strong> ${state}</p>
+            <p><strong>ZIP:</strong> ${zip}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Marital Status:</strong> ${maritalStatus}</p>
+            <p><strong>Immigration Status:</strong> ${immigrationStatus}</p>
+            <p><strong>Race:</strong> ${race}</p>
+            <p><strong>Vaccines:</strong> ${vaccines.join(', ')}</p>
+        `;
+        
+        // Display confirmation message
+        document.getElementById('confirmationMessage').innerHTML = confirmationMessage;
     });
 });

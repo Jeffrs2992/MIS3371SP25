@@ -25,7 +25,7 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 2)
     </header>
 
     <!-- Main Form -->
-    <form action="thank-you.html" method="POST">
+    <form action="thank-you.html" method="POST" id="registration-form">
 
         <!-- Personal Information -->
         <fieldset>
@@ -234,7 +234,8 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 2)
                     <td><label for="email">Email:</label></td>
                     <td><input type="email" 
                                id="email" 
-                               name="email" 
+                               name="email"
+                               placeholder="name@domain.tld" 
                                required>
                     </td>
                 </tr>
@@ -243,6 +244,7 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 2)
                     <td><input type="tel" 
                                id="phone" 
                                name="phone" 
+                               minlength="12"
                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
                                placeholder="XXX-XXX-XXXX">
                     </td>
@@ -402,28 +404,46 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 2)
                    maxlength="30" 
                    pattern="^[a-zA-Z][a-zA-Z0-9_-]{4,29}$"  
                    title="User ID must start with a letter, can contain letters, numbers, underscores, or dashes, and have no spaces or special characters."
-                   required><br><br>
+                   required><br>
 
-        <!-- Password Field -->
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
+            <!-- Password Field -->
+            <label for="password">Password:</label><br>
+            <input type="password" 
+                id="password" 
+                name="password" 
+                title="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character."
+                required><br>
 
-        <!-- Confirm Password Field -->
-        <label for="confirm_password">Re-enter Password:</label><br>
-        <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+            <!-- Confirm Password Field -->
+            <label for="confirm_password">Re-enter Password:</label><br>
+            <input type="password" 
+                id="confirm_password" 
+                name="confirm_password" 
+                title="Passwords must match"
+                required><br>
 
-        <!-- Message to show when passwords don't match -->
-        <p id="error-message" style="color: red; display: none;"></p>
-
-        <!-- Link to External JavaScript File -->
-        <script src="scripts.js"></script>
+            <!-- Message to show when passwords don't match -->
+            <p id="error-message" style="color: red; display: none;"></p>
         </fieldset>
 
         <!-- Buttons -->
         <button type="reset">Reset</button>
         <button type="submit">Submit</button>
+        <button type="button" id="reviewButton">Review</button>
     </form>
-   
+    
+        <!-- Popup Modal -->
+        <div id="popupReview" style="display: none;">
+            <div id="popupContent">
+                <h2>Review Your Information</h2>
+                <div id="reviewDetails"></div>
+                <button type="button" onclick="submitForm()">Submit</button>
+                <button type="button" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+        
+        <script src="script.js"></script>
+
     <!-- Footer -->
     <footer>
         <div class="footer-container">
@@ -445,6 +465,6 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 2)
             </div>
         </div>
     </footer>
-   
+
 </body>
 </html>
