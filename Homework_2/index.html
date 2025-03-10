@@ -129,6 +129,7 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 2)
                     <td><input type="text" 
                                id="address" 
                                name="address" 
+                               minlength="2"
                                maxlength="30" 
                                required></td>
                 </tr>
@@ -137,6 +138,7 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 2)
                     <td><input type="text" 
                                id="address2" 
                                name="address2" 
+                               minlength="2"
                                maxlength="30" 
                                placeholder="Apt, Suite, etc."></td>
                 </tr>
@@ -145,6 +147,7 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 2)
                     <td><input type="text" 
                                id="city" 
                                name="city" 
+                               minlength="2"
                                maxlength="30" 
                                required></td>
                 </tr>
@@ -214,8 +217,10 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 2)
                                id="zip" 
                                name="zip" 
                                title="Zip Code must be between 5 to 10 characters"
-                               maxlength="10" 
-                               pattern=".{5,10}" 
+                               minlength="5"
+                               maxlength="10"
+                               pattern="^\d{5}(-\d{4})?$"
+                               onblur="validateZip()" 
                                required></td>
                 </tr>
             </table>
@@ -224,12 +229,26 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 2)
         <!-- Contact Information -->
         <fieldset>
             <legend>Contact Information</legend>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-           
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="XXX-XXX-XXXX">
-        </fieldset>
+            <table>
+                <tr>
+                    <td><label for="email">Email:</label></td>
+                    <td><input type="email" 
+                               id="email" 
+                               name="email" 
+                               required>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="phone">Phone Number:</label></td>
+                    <td><input type="tel" 
+                               id="phone" 
+                               name="phone" 
+                               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
+                               placeholder="XXX-XXX-XXXX">
+                    </td>
+                </tr>
+            </table>
+        </fieldset>        
 
         <!-- Additional Identification Information-->
         <fieldset>
@@ -237,51 +256,96 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 2)
             
         <!-- Marital Status -->
             <label>Marital Status:</label><br>
-            <input type="radio" id="single" name="marital_status" value="Single" required>
+            <input type="radio" 
+                   id="single" 
+                   name="marital_status" 
+                   value="Single" 
+                   required>
             <label for="single">Single</label><br>
 
-            <input type="radio" id="married" name="marital_status" value="Married">
+            <input type="radio" 
+                   id="married" 
+                   name="marital_status" 
+                   value="Married">
             <label for="married">Married</label><br>
 
-            <input type="radio" id="divorced" name="marital_status" value="Divorced">
+            <input type="radio" 
+                   id="divorced" 
+                   name="marital_status" 
+                   value="Divorced">
             <label for="divorced">Divorced</label><br>
 
-            <input type="radio" id="widowed" name="marital_status" value="Widowed">
+            <input type="radio" 
+                   id="widowed" 
+                   name="marital_status" 
+                   value="Widowed">
             <label for="widowed">Widowed</label><br><br>
 
 
             <!-- Immigration Status -->
             <label>Immigration Status:</label><br>
-            <input type="radio" id="citizen" name="immigration_status" value="Citizen" required>
+            <input type="radio" 
+                   id="citizen" 
+                   name="immigration_status" 
+                   value="Citizen" 
+                   required>
             <label for="citizen">U.S. Citizen</label><br>
 
-            <input type="radio" id="permanent_resident" name="immigration_status" value="Permanent Resident">
+            <input type="radio" 
+                   id="permanent_resident" 
+                   name="immigration_status" 
+                   value="Permanent Resident">
             <label for="permanent_resident">Permanent Resident</label><br>
 
-            <input type="radio" id="visa_holder" name="immigration_status" value="Visa Holder">
+            <input type="radio" 
+                   id="visa_holder" 
+                   name="immigration_status" 
+                   value="Visa Holder">
             <label for="visa_holder">Visa Holder</label><br>
 
-            <input type="radio" id="other" name="immigration_status" value="Other">
+            <input type="radio" 
+                   id="other" 
+                   name="immigration_status" 
+                   value="Other">
             <label for="other">Other</label><br><br>
 
             <!-- Race -->
             <label>Race:</label><br>
-            <input type="radio" id="white" name="race" value="White" required>
+            <input type="radio" 
+                   id="white" 
+                   name="race" 
+                   value="White" 
+                   required>
             <label for="white">White</label><br>
 
-            <input type="radio" id="black" name="race" value="Black">
+            <input type="radio" 
+                   id="black" 
+                   name="race" 
+                   value="Black">
             <label for="black">Black or African American</label><br>
 
-            <input type="radio" id="asian" name="race" value="Asian">
+            <input type="radio" 
+                   id="asian" 
+                   name="race" 
+                   value="Asian">
             <label for="asian">Asian</label><br>
 
-            <input type="radio" id="native" name="race" value="Native American">
+            <input type="radio" 
+                   id="native" 
+                   name="race" 
+                   value="Native American">
             <label for="native">American Indian or Alaska Native</label><br>
 
-            <input type="radio" id="pacific" name="race" value="Pacific Islander">
+            <input type="radio" 
+                   id="pacific" 
+                   name="race" 
+                   value="Pacific Islander">
             <label for="pacific">Native Hawaiian or Other Pacific Islander</label><br>
 
-            <input type="radio" id="two_or_more" name="race" value="Two or More Races">
+            <input type="radio" 
+                   id="two_or_more" 
+                   name="race" 
+                   value="Two or More Races">
             <label for="two_or_more">Two or More Races</label><br><br>
         </fieldset>
 
@@ -307,51 +371,52 @@ Description: Patient Registration Form for Pawsitive Medicine (Homework 2)
         </fieldset>
 
         <!-- Current Satisfaction with Provider -->
-         <fieldset>
-        <div class="slider-container">
-            <legend for="satisfaction-slider">Satisfaction with Current Provider:</legend><br>
-            <input type="range" id="satisfaction-slider" name="satisfaction" min="0" max="100" value="50" class="slider">
-            <div class="slider-labels">
-              <span>Very Dissatisfied</span>
-              <span>Satisfied</span>
-              <span>Very Satisfied</span>
+        <fieldset>
+            <legend>Satisfaction with Current Provider (0-100):</legend>
+            <div class="slider-container">
+                <input type="range" 
+                    id="satisfaction-slider" 
+                    name="satisfaction" 
+                    min="0" 
+                    max="100" 
+                    value="50" 
+                    class="slider" 
+                    oninput="updateSatisfactionValue(event)">
+                <span id="satisfaction-value" class="slider-value">50</span>
+                <div class="slider-labels">
+                    <span>Very Dissatisfied</span>
+                    <span>Satisfied</span>
+                    <span>Very Satisfied</span>
+                </div>
             </div>
-          </div>
         </fieldset>
           
         <!-- UserID -->
         <fieldset>
             <legend>Account Setup</legend>
             <label for="userID">User ID:</label><br>
-            <input type="text" id="userID" name="userID" maxlength="20" required><br><br>
-           
+            <input type="text" 
+                   id="userID" 
+                   name="userID" 
+                   minlength="5"
+                   maxlength="30" 
+                   pattern="^[a-zA-Z][a-zA-Z0-9_-]{4,29}$"  
+                   title="User ID must start with a letter, can contain letters, numbers, underscores, or dashes, and have no spaces or special characters."
+                   required><br><br>
+
         <!-- Password Field -->
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" required><br><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
 
         <!-- Confirm Password Field -->
-            <label for="confirm_password">Re-enter Password:</label><br>
-            <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+        <label for="confirm_password">Re-enter Password:</label><br>
+        <input type="password" id="confirm_password" name="confirm_password" required><br><br>
 
         <!-- Message to show when passwords don't match -->
-            <p id="error-message" style="color: red; display: none;">Passwords do not match!</p>
+        <p id="error-message" style="color: red; display: none;"></p>
 
-            <script>
-                const form = document.querySelector("form");  // Replace with your form selector
-                const errorMessage = document.getElementById("error-message");  // The error message element
-
-                form.addEventListener("submit", function(event) {
-                    const password = document.getElementById("password").value;
-                    const confirmPassword = document.getElementById("confirm_password").value;
-
-                    if (password !== confirmPassword) {
-                        errorMessage.style.display = "block";  // Show the error message
-                        event.preventDefault();  // Prevent form submission
-                    } else {
-                        errorMessage.style.display = "none";  // Hide the error message if passwords match
-                    }
-                });
-            </script>
+        <!-- Link to External JavaScript File -->
+        <script src="scripts.js"></script>
         </fieldset>
 
         <!-- Buttons -->
