@@ -1,0 +1,162 @@
+/* General page layout */
+body {
+    font-family: Arial, sans-serif; /* Use a clean, readable font */
+    margin: 0; /* Remove default margin */
+    padding: 0 20px; /* Add horizontal padding */
+    background-color: #f9f9f9; /* Light gray background */
+    color: #333; /* Dark gray text */
+  }
+  
+  header {
+    text-align: center; /* Center text in header */
+    background-color: #C8102E; /* UH red */
+    color: white; /* White text */
+    padding: 20px 10px; /* Add space inside header */
+    border-bottom: 4px solid #9D2235; /* Slightly darker red border */
+  }
+  
+  header img.cougarpaw {
+    width: 80px; /* Set logo size */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  h1 {
+    margin: 10px 0 5px 0; /* Add space around heading */
+    font-size: 24px; /* Set heading size */
+  }
+  
+  #currentDate {
+    font-style: italic; /* Italicize date */
+    font-size: 14px; /* Set date text size */
+  }
+  
+  fieldset {
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    margin: 20px 0; /* Vertical spacing */
+    padding: 15px; /* Space inside fieldset */
+    background-color: #fff; /* White background */
+  }
+  
+  legend {
+    font-weight: bold; /* Bold text */
+    padding: 0 10px; /* Space around legend */
+    color: #C8102E; /* UH red text */
+  }
+  
+  .required::after {
+    content: " *"; /* Append asterisk */
+    color: red; /* Red asterisk for required fields */
+  }
+  
+  table {
+    width: 100%; /* Full width table */
+    border-collapse: collapse; /* Remove gaps between cells */
+    margin-top: 10px; /* Space above table */
+  }
+  
+  tr {
+    margin-bottom: 10px; /* Space between rows */
+  }
+  
+  td {
+    padding: 8px 10px; /* Add space around cell content */
+    vertical-align: top; /* Align top of cells */
+    text-align: left; /* Align text left */
+    width: 50%; /* Split into two equal columns */
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="date"],
+  input[type="tel"],
+  select {
+    width: 100%; /* Match column width */
+    padding: 6px; /* Inner spacing */
+    font-size: 14px; /* Readable text */
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded input edges */
+    box-sizing: border-box; /* Include padding in width */
+    transition: all 0.2s ease-in-out; /* Smooth resizing */
+  }
+  
+  input:focus, select:focus {
+    border-color: #9D2235; /* Highlight with UH red */
+    outline: none; /* Remove default outline */
+    background-color: #f0f8ff; /* Light highlight background */
+  }
+  
+  input[type="radio"],
+  input[type="checkbox"] {
+    width: auto; /* Default size */
+    margin-right: 5px; /* Space after */
+  }
+  
+  label {
+    font-weight: 500; /* Medium font weight */
+    display: inline-block; /* Keep labels on the same line */
+    margin-bottom: 4px; /* Space under label */
+  }
+  
+  .error {
+    display: block; /* Show below input */
+    color: red; /* Red text */
+    font-size: 12px; /* Smaller font */
+    margin-top: 2px; /* Space above error */
+    min-height: 1em; /* Reserve space to avoid shifting */
+  }
+  
+  .slider-container {
+    padding: 10px 0; /* Space around slider */
+  }
+  
+  .slider {
+    width: 100%; /* Full width slider */
+  }
+  
+  .slider-value {
+    font-weight: bold; /* Make value stand out */
+    margin-left: 10px; /* Space from slider */
+  }
+  
+  .slider-labels {
+    display: flex; /* Align labels side-by-side */
+    justify-content: space-between; /* Spread labels evenly */
+    font-size: 13px; /* Smaller font */
+    margin-top: 5px; /* Space above */
+    color: #555; /* Medium gray */
+  }
+  
+  #outputformdata {
+    font-family: monospace; /* Fixed-width font for formatting */
+    background: #eef; /* Light blue background */
+    border: 1px solid #99c; /* Blue-gray border */
+    padding: 10px; /* Inner spacing */
+    margin: 20px 0; /* Vertical space */
+    white-space: pre-wrap; /* Preserve formatting */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  button {
+    padding: 10px 20px; /* Button size */
+    font-size: 14px; /* Readable size */
+    margin-top: 20px; /* Space above */
+    margin-right: 10px; /* Space between buttons */
+    background-color: #C8102E; /* UH red */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+  }
+  
+  button:hover {
+    background-color: #9D2235; /* Darker red on hover */
+  }
+  
+  /* Phone number input auto-formatting */
+  input#phone {
+    font-family: monospace;
+    letter-spacing: 1px;
+  }
+  

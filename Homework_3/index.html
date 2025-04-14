@@ -1,0 +1,576 @@
+<!doctype html>
+<!-- 
+    Program Name: index.html
+    Author: Japheth Silva
+    Date Created: 2025-04-13
+    Date Updated: 2025-04-13
+    Version: 1.0
+    Description: Patient Registration Form for Pawsitive Medicine (Homework 3)
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Registration Form - Homework 2</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+</head>
+    <body onload="displayDate()">
+
+        <!-- Main header section -->
+        <header>
+            <img src="Logos_HW3/cougarpaw.jpg" alt="Cougar Paw Logo" class="cougarpaw">
+            <h1>Pawsitive Medicine Patient Registration Form</h1>
+            <p id="currentDate"></p>
+        </header>
+
+        <!-- Main Form -->
+        <form action="thank-you.html" method="POST" id="registration-form">
+
+            <!-- Questionnaire Information -->
+            <fieldset>
+                <legend>Questionnaire</legend>
+            
+                <!-- Marital Status -->
+                <fieldset>
+                <legend class="required">Marital Status</legend>
+            
+                <input type="radio" id="single" name="marital_status" value="Single" required>
+                <label for="single">Single</label><br>
+            
+                <input type="radio" id="married" name="marital_status" value="Married">
+                <label for="married">Married</label><br>
+            
+                <input type="radio" id="divorced" name="marital_status" value="Divorced">
+                <label for="divorced">Divorced</label><br>
+            
+                <input type="radio" id="widowed" name="marital_status" value="Widowed">
+                <label for="widowed">Widowed</label><br>
+                </fieldset>
+            
+                <br>
+            
+                <!-- Immigration Status -->
+                <fieldset>
+                <legend class="required">Immigration Status</legend>
+            
+                <input type="radio" id="citizen" name="immigration_status" value="Citizen" required>
+                <label for="citizen">U.S. Citizen</label><br>
+            
+                <input type="radio" id="permanent_resident" name="immigration_status" value="Permanent Resident">
+                <label for="permanent_resident">Permanent Resident</label><br>
+            
+                <input type="radio" id="visa_holder" name="immigration_status" value="Visa Holder">
+                <label for="visa_holder">Visa Holder</label><br>
+            
+                <input type="radio" id="other" name="immigration_status" value="Other">
+                <label for="other">Other</label><br>
+                </fieldset>
+            
+                <br>
+            
+                <!-- Race -->
+                <fieldset>
+                    <legend class="required">Race</legend>
+                
+                    <input type="radio" id="white" name="race" value="White" required>
+                    <label for="white">White</label><br>
+                
+                    <input type="radio" id="black" name="race" value="Black">
+                    <label for="black">Black or African American</label><br>
+                
+                    <input type="radio" id="asian" name="race" value="Asian">
+                    <label for="asian">Asian</label><br>
+                
+                    <input type="radio" id="native" name="race" value="Native American">
+                    <label for="native">American Indian or Alaska Native</label><br>
+                
+                    <input type="radio" id="pacific" name="race" value="Pacific Islander">
+                    <label for="pacific">Native Hawaiian or Other Pacific Islander</label><br>
+                
+                    <input type="radio" id="two_or_more" name="race" value="Two or More Races">
+                    <label for="two_or_more">Two or More Races</label><br>
+                </fieldset>
+
+                <!-- Vaccination History Section -->
+                <fieldset>
+                    <legend class="required">Vaccination History</legend>
+                    <label>Select all the vaccines you have received in the past 10 years:</label><br>
+                  
+                    <div id="vaccines-group">
+                      <input type="checkbox" id="covid19" name="vaccines" value="COVID-19" onchange="handleVaccineSelection()">
+                      <label for="covid19">COVID-19</label><br>
+                  
+                      <input type="checkbox" id="flu" name="vaccines" value="Influenza" onchange="handleVaccineSelection()">
+                      <label for="flu">Influenza (Flu)</label><br>
+                  
+                      <input type="checkbox" id="tetanus" name="vaccines" value="Tetanus" onchange="handleVaccineSelection()">
+                      <label for="tetanus">Tetanus (Td/Tdap)</label><br>
+                  
+                      <input type="checkbox" id="mmr" name="vaccines" value="MMR" onchange="handleVaccineSelection()">
+                      <label for="mmr">Measles, Mumps, and Rubella (MMR)</label><br>
+                  
+                      <input type="checkbox" id="hepatitisb" name="vaccines" value="Hepatitis B" onchange="handleVaccineSelection()">
+                      <label for="hepatitisb">Hepatitis B</label><br>
+                  
+                      <!-- None of the above -->
+                      <input type="checkbox" id="none" name="vaccines" value="None" onchange="handleVaccineSelection()">
+                      <label for="none">None of the above</label><br>
+                    </div>
+                  
+                    <span id="vaccinesError" class="error"></span>
+                  </fieldset>
+                  
+
+                <!-- Current Satisfaction with Provider -->
+                <fieldset>
+                    <legend class="required">Satisfaction with Current Provider (0–100):</legend>
+                    
+                    <div class="slider-container">
+                      <input type="range" 
+                             id="satisfaction-slider" 
+                             name="satisfaction" 
+                             min="0" 
+                             max="100" 
+                             value="50" 
+                             class="slider" 
+                             oninput="updateSatisfactionValue(this)"
+                             required>
+                      
+                      <span id="satisfaction-value" class="slider-value">50</span>
+                      
+                      <div class="slider-labels">
+                        <span>Very Dissatisfied</span>
+                        <span>Satisfied</span>
+                        <span>Very Satisfied</span>
+                      </div>
+                    </div>
+                  
+                    <span id="satisfactionError" class="error"></span>
+                  </fieldset>
+                  
+            </fieldset>  
+
+            <!-- Personal Information -->
+            <fieldset>
+                <legend>Personal Information</legend>
+                <table>
+                    <!--Title-->
+                    <tr>
+                        <td><label for="title">Title:</label></td>
+                        <td>
+                            <select id="title" name="title" required>
+                                <option value="">Select</option>
+                                <option value="Mr">Mr.</option>
+                                <option value="Mrs">Mrs.</option>
+                                <option value="Ms">Ms.</option>
+                                <option value="Miss">Miss</option>
+                                <option value="Dr">Dr.</option>
+                                <option value="Prof">Prof.</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!--First Name-->
+                    <tr>
+                        <!-- First Name label-->
+                        <td><label for="firstName" class="required">First Name:</label></td>
+                        <td>
+                            <!-- First Name input field -->
+                            <input type="text"
+                                id="firstName"
+                                name="firstName"
+                                size="12"
+                                minlength="1"
+                                maxlength="30"
+                                pattern="[A-Za-z'-]{1,30}"
+                                required
+                                placeholder="Allen (req'd)"
+                                title="Enter your first name (Must contain 1-30 characters. Letters, apostrophes, and dashes only)"
+                                oninput="this.setCustomValidity('')"
+                                oninvalid="this.setCustomValidity('Invalid first name. Please enter 1-30 characters with letters, apostrophes, and dashes only.')"
+                                onblur="checkfirstname()">
+                            <!-- Error message for first name -->
+                            <br><span id="firstNameError" style="color: red;"></span>
+                        </td>
+                    </tr>
+                    <!--Middle Initial-->
+                    <tr>
+                        <!-- Middle Initial label-->
+                        <td><label for="middleInitial">Middle Initial:</label></td>
+                        <td>
+                        <!-- Middle Initial input field -->
+                        <input type="text" 
+                                id="middleInitial" 
+                                name="middleInitial" 
+                                size="3"
+                                maxlength="1"
+                                pattern="[A-Z]?"
+                                title="Enter your middle initial (single uppercase letter)"
+                                placeholder="E (opt)"
+                                oninvalid="this.setCustomValidity('Invalid middle initial. Please enter a single uppercase letter or leave it blank.')"
+                                oninput="this.setCustomValidity('')"
+                                onblur="checkmiddleinitial()">
+                            <!-- Error message for middle initial -->
+                            <br><span id="middleInitialError" style="color: red;"></span>
+                        </td>
+                    </tr>    
+                    <!--Last Name-->              
+                    <tr>
+                        <!-- Last Name label-->
+                        <td><label for="lastName" class="required">Last Name:</label></td>
+                        <td>
+                            <!-- Last Name input field -->
+                            <input type="text" 
+                                id="lastName" 
+                                name="lastName"
+                                size="12"
+                                minlength="1"
+                                maxlength="30"
+                                pattern="[A-Za-z'-]{1,30}"
+                                required
+                                placeholder="Iverson (req'd)" 
+                                title="Enter your last name (Must contain 1-30 characters. Letters, apostrophes, and dashes only)" 
+                                oninput="this.setCustomValidity('')"
+                                oninvalid="this.setCustomValidity('Invalid last name. Must contain 1-30 characters. Letters, apostrophes, and dashes only')"  
+                                onblur="checklastname()">
+                            <!-- Error message for last name -->
+                            <br><span id="lastNameError" style="color: red;"></span>
+                        </td>
+                    </tr>
+                    <!--Date of Birth-->
+                    <tr>
+                        <!-- Date of Birth label-->
+                        <td><label for="dob" class="required">Date of Birth:</label></td>
+                        <td>
+                            <!-- Date of Birth input field -->
+                            <input type="date" 
+                                id="dob" 
+                                name="dob"
+                                title="Enter your date of birth (MM/DD/YYYY)" 
+                                onblur="checkDOB()"
+                                required>
+                            <!-- Error message for date of birth -->
+                            <br><span id="dobError" style="color: red;"></span>
+                        </td>
+                    </tr>
+                    <!--SSN-->
+                    <tr>
+                        <!-- Social Security Number label-->
+                        <td><label for="ssn" class="required">Social Security Number:</label></td>
+                        <td>
+                            <!-- Social Security Number input field -->
+                            <input type="password" 
+                                id="ssn" 
+                                name="ssn" 
+                                size="12"
+                                title="Enter your social security number (9 digits only — no dashes)"
+                                placeholder="XXXXXXXXX"
+                                maxlength="9"
+                                pattern="\d{9}"
+                                required
+                                oninput="this.setCustomValidity('')"
+                                oninvalid="this.setCustomValidity('Must be exactly 9 digits (numbers only)')"
+                                onblur="checkSSN()">
+                            <!-- Error message for social security number -->
+                            <br><span id="ssnError" style="color: red;"></span>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+
+            <!-- Mailing Address -->
+            <fieldset>
+                <legend>Mailing Address</legend>
+                <table>
+                <!-- Address Line 1 -->
+                <tr>
+                    <td><label for="address" class="required">Address Line 1:</label></td>
+                    <td>
+                    <!-- Address Line 1 input field -->
+                    <input type="text" 
+                            id="address" 
+                            name="address" 
+                            minlength="2"
+                            maxlength="30"
+                            placeholder="4200 MLK Blvd (req'd)"
+                            autocomplete="address-line1"
+                            onblur="checkAddr1()"
+                            required>
+                    <!-- Error message for address line 1 -->
+                    <br><span id="addr1Error" style="color: red;"></span>
+                    </td>
+                </tr>
+            
+                <!-- Address Line 2 -->
+                <tr>
+                    <!-- Address Line 2 label-->
+                    <td><label for="address2">Address Line 2 (optional):</label></td>
+                    <td>
+                    <!-- Address Line 2 input field -->
+                    <!-- This field is optional, so no required attribute -->
+                    <input type="text" 
+                            id="address2" 
+                            name="address2" 
+                            minlength="2"
+                            maxlength="30"
+                            placeholder="Apt, Suite, etc. (opt)"
+                            autocomplete="address-line2"
+                            onblur="checkAddr2()">
+                    <!-- Error message for address line 2 -->
+                    <br><span id="addr2Error" style="color: red;"></span>
+                    </td>
+                </tr>
+            
+                <!-- City -->
+                <tr>
+                    <!-- City label-->
+                    <td><label for="city" class="required">City:</label></td>
+                    <td>
+                    <!-- City input field -->
+                    <input type="text" 
+                            id="city" 
+                            name="city" 
+                            minlength="2"
+                            maxlength="30" 
+                            placeholder="Space City (req'd)"
+                            autocomplete="address-level2"
+                            onblur="checkCity()"
+                            required>
+                    <!-- Error message for city -->
+                    <br><span id="cityError" style="color: red;"></span>
+                    </td>
+                </tr>
+            
+                <!-- State -->
+                <tr>
+                    <!-- State label-->
+                    <td><label for="state" class="required">State:</label></td>
+                    <td>
+                    <!-- State dropdown menu -->
+                    <!-- The 'required' attribute ensures that a state is selected -->
+                    <select id="state" name="state" autocomplete="address-level1" required>
+                        <option value="">Select a State</option>
+                        <!-- All 50 states, DC, PR -->
+                        <option value="AL">AL</option>
+                        <option value="AK">AK</option>
+                        <option value="AZ">AZ</option>
+                        <option value="AR">AR</option>
+                        <option value="CA">CA</option>
+                        <option value="CO">CO</option>
+                        <option value="CT">CT</option>
+                        <option value="D.C.">D.C.</option>
+                        <option value="DE">DE</option>
+                        <option value="FL">FL</option>
+                        <option value="GA">GA</option>
+                        <option value="HI">HI</option>
+                        <option value="ID">ID</option>
+                        <option value="IL">IL</option>
+                        <option value="IN">IN</option>
+                        <option value="IA">IA</option>
+                        <option value="KS">KS</option>
+                        <option value="KY">KY</option>
+                        <option value="LA">LA</option>
+                        <option value="ME">ME</option>
+                        <option value="MD">MD</option>
+                        <option value="MA">MA</option>
+                        <option value="MI">MI</option>
+                        <option value="MN">MN</option>
+                        <option value="MS">MS</option>
+                        <option value="MO">MO</option>
+                        <option value="MT">MT</option>
+                        <option value="NE">NE</option>
+                        <option value="NV">NV</option>
+                        <option value="NH">NH</option>
+                        <option value="NJ">NJ</option>
+                        <option value="NM">NM</option>
+                        <option value="NY">NY</option>
+                        <option value="NC">NC</option>
+                        <option value="ND">ND</option>
+                        <option value="OH">OH</option>
+                        <option value="OK">OK</option>
+                        <option value="OR">OR</option>
+                        <option value="PA">PA</option>
+                        <option value="PR">PR</option>
+                        <option value="RI">RI</option>
+                        <option value="SC">SC</option>
+                        <option value="SD">SD</option>
+                        <option value="TN">TN</option>
+                        <option value="TX">TX</option>
+                        <option value="UT">UT</option>
+                        <option value="VT">VT</option>
+                        <option value="VA">VA</option>
+                        <option value="WA">WA</option>
+                        <option value="WV">WV</option>
+                        <option value="WI">WI</option>
+                        <option value="WY">WY</option>
+                    </select>
+                    <!-- Error message for state -->
+                    <br><span id="stateError" style="color: red;"></span>
+                    </td>
+                </tr>
+            
+                <!-- Zip Code -->
+                <tr>
+                    <!-- Zip Code label-->
+                    <td><label for="zip" class="required">Zip Code:</label></td>
+                    <td>
+                    <!-- Zip Code input field -->
+                    <input type="text" 
+                            id="zip" 
+                            name="zip" 
+                            title="Enter a 5-digit ZIP or ZIP+4 (e.g., 12345 or 12345-6789)"
+                            minlength="5"
+                            maxlength="10"
+                            pattern="[0-9]{5}(-[0-9]{4})?"
+                            placeholder="12345 or 12345-6789 (req'd)"
+                            autocomplete="postal-code"
+                            onblur="checkZip()" 
+                            required>
+                    <!-- Error message for zip code -->
+                    <br><span id="zipError" style="color: red;"></span>
+                    </td>
+                </tr>
+                </table>
+            </fieldset>
+
+            <!-- Contact Information -->
+            <fieldset>
+                <legend>Contact Information</legend>
+                <table>
+                    <!-- Email -->
+                    <tr>
+                        <!-- Email label-->
+                    <td><label for="email" class="required">Email:</label></td>
+                    <td>
+                        <!-- Email input field -->
+                        <input type="email" 
+                            id="email" 
+                            name="email"
+                            size="40"
+                            maxlength="40"
+                            placeholder="name@domain.tld" 
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,20}$"
+                            required
+                            autocomplete="email"
+                            oninvalid="this.setCustomValidity('Invalid email address. Use format name@domain.tld')"
+                            oninput="this.setCustomValidity('')"
+                            onblur="checkEmail()">
+                        <!-- Error message for email -->
+                        <br><span id="emailError" style="color: red;"></span>
+                    </td>
+                    </tr>
+                
+                    <!-- Phone -->
+                    <tr>
+                        <!-- Phone label-->
+                    <td><label for="phone" class="required">Phone Number:</label></td>
+                    <td>
+                        <!-- Phone input field -->
+                        <input type="text" 
+                            id="phone" 
+                            name="phone" 
+                            placeholder="(713) 281-8320"
+                            maxlength="14"
+                            autocomplete="tel"
+                            oninput="fixphone()"
+                            onblur="checkPhone()"
+                            required>
+                        <!-- Error message for phone number -->
+                        <br><span id="phoneError" style="color: red;"></span>
+                    </td>
+                    </tr>
+                </table>              
+            </fieldset>
+
+            <fieldset>
+                <legend class="required">Account Setup</legend>
+            
+                <table>
+                <!-- User ID -->
+                <tr>
+                        <!-- User ID label-->
+                    <td><label for="userID" class="required">Desired User ID:</label></td>
+                    <td>
+                        <!-- User ID input field -->
+                    <input type="text"
+                            id="userID"
+                            name="userID"
+                            minlength="5"
+                            maxlength="30"
+                            pattern="[A-Za-z][A-Za-z0-9_-]{4,29}"
+                            autocomplete="username"
+                            placeholder="Choose a User ID (req'd)"
+                            title="5-30 characters. Must start with a letter. Letters, numbers, dash or underscore only. No spaces."
+                            required
+                            onblur="validateUserID()"
+                            oninput="this.setCustomValidity('')"
+                            oninvalid="this.setCustomValidity('User ID must be 5-30 characters, start with a letter, and use only letters, numbers, dash or underscore.')">
+                        <!-- Error message for user ID -->
+                        <br><span id="userIDError" style="color: red;"></span>
+                    </td>
+                </tr>
+            
+                <!-- Password -->
+                <tr>
+                        <!-- Password label-->
+                    <td><label for="password1" class="required">Password:</label></td>
+                    <td>
+                        <!-- Password input field -->
+                    <input type="password"
+                            id="password1"
+                            name="password1"
+                            minlength="8"
+                            maxlength="30"
+                            placeholder="Enter your password"
+                            autocomplete="new-password"
+                            title="8–30 characters. Must include uppercase, lowercase, digit, and special character. No quotes."
+                            required
+                            onblur="validatePasswords()"
+                            oninput="validatePasswords()">
+                        <!-- Error message for password -->
+                    <br><span id="password1Error" style="color: red;"></span>
+                    </td>
+                </tr>
+            
+                <!-- Confirm Password -->
+                <tr>
+
+                    <td><label for="password2" class="required">Confirm Password:</label></td>
+                    <td>
+                    <!-- Confirm Password input field -->
+                    <input type="password"
+                            id="password2"
+                            name="password2"
+                            minlength="8"
+                            maxlength="30"
+                            placeholder="Re-enter your password"
+                            autocomplete="new-password"
+                            required
+                            onblur="validatePasswords()"
+                            oninput="validatePasswords()">
+                    <!-- Error message for confirm password -->
+                    <br><span id="password2Error" style="color: red;"></span>
+                    </td>
+                </tr>
+                </table>
+            </fieldset>
+            
+            <!-- Action Buttons -->
+            <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                <!-- Left: Review and Submit -->
+                <div>
+                <button type="button" onclick="reviewFormData()">Review / Get Data</button>
+                <button type="submit">Submit</button>
+                </div>
+            
+                <!-- Right: Clear -->
+                <div>
+                <button type="reset">Clear</button>
+                </div>
+            </div>
+        </form>
+        <br><br>
+            <!-- Display for review -->
+            <p id="outputformdata"></p>
+    </body>
+</html>
