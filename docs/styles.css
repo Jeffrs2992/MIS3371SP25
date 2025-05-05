@@ -1,8 +1,19 @@
 /* General page layout */
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f9f9f9; /* Match your existing body background */
+  padding: 15px 20px;
+  border-top: 2px solid #9D2235;
+  z-index: 1000;
+  }
+
 body {
     font-family: Arial, sans-serif; /* Use a clean, readable font */
     margin: 0; /* Remove default margin */
-    padding: 0 20px; /* Add horizontal padding */
+    padding: 0 20px 180px 20px; /* Add horizontal padding */
     background-color: #f9f9f9; /* Light gray background */
     color: #333; /* Dark gray text */
   }
