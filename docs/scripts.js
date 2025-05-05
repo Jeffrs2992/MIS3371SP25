@@ -273,4 +273,67 @@ function displayDate() {
     review += `\nUser ID: ${userID}`;
   
     output.textContent = review;
+
+    // Cookie helpers
+    function setCookie(name, value, hours) {
+      const date = new Date();
+      date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
+      const expires = "expires=" + date.toUTCString();
+      document.cookie = `${name}=${value}; ${expires}; path=/`;
+    }
+
+    function getCookie(name) {
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const cookies = decodedCookie.split(';');
+      for (let c of cookies) {
+        while (c.charAt(0) === ' ') c = c.substring(1);
+        if (c.indexOf(name + "=") === 0) return c.substring(name.length + 1, c.length);
+      }
+      return "";
+    }
+
+    function deleteCookie(name) {
+      document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+
+    // Run on load
+    window.onload = function () {
+      displayDate();
+      const firstName = getCookie("firstName");
+
+      const greeting = document.createElement("p");
+      greeting.style.fontWeight = "bold";
+      if (firstName) {
+        greeting.textContent = `Welcome back, ${firstName}!`;
+        document.getElementById("firstName").value = firstName;
+
+        const resetBox = document.createElement("div");
+        resetBox.innerHTML = `<label><input type="checkbox" id="newUserBox"> Not ${firstName}? Click here to start as a new user.</label>`;
+        document.querySelector("header").appendChild(resetBox);
+
+        document.getElementById("newUserBox").addEventListener("change", function () {
+          if (this.checked) {
+            deleteCookie("firstName");
+            document.getElementById("registration-form").reset();
+            document.getElementById("firstName").value = "";
+            alert("Cookie cleared. You can now enter a new name.");
+          }
+        });
+
+      } else {
+        greeting.textContent = "Welcome new user!";
+      }
+      document.querySelector("header").appendChild(greeting);
+    };
+
+    // Save name if "Remember Me" is checked
+    function maybeSaveName() {
+      const remember = document.getElementById("rememberMe");
+      const name = document.getElementById("firstName").value;
+      if (remember && remember.checked) {
+        setCookie("firstName", name, 48);
+      } else {
+        deleteCookie("firstName");
+      }
+    }
   }  

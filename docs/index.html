@@ -35,7 +35,7 @@
         </header>
 
         <!-- Main Form -->
-        <form action="thank-you.html" method="POST" id="registration-form">
+        <form action="thank-you.html" method="POST" id="registration-form" onsubmit="maybeSaveName()">
 
             <!-- Questionnaire Information -->
             <fieldset>
@@ -199,6 +199,8 @@
                                 oninput="this.setCustomValidity('')"
                                 oninvalid="this.setCustomValidity('Invalid first name. Please enter 1-30 characters with letters, apostrophes, and dashes only.')"
                                 onblur="checkfirstname()">
+                            <!-- Remember Me Box -->
+                            <br><label><input type="checkbox" id="rememberMe" checked> Remember Me</label>
                             <!-- Error message for first name -->
                             <br><span id="firstNameError" style="color: red;"></span>
                         </td>
