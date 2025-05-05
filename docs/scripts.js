@@ -1,339 +1,246 @@
-// Display current date in header
+// Display current date
 function displayDate() {
-    const date = new Date();
-    document.getElementById("currentDate").textContent = date.toDateString();
-  }
-  
-  // Format phone number as (XXX) XXX-XXXX while typing
-  function fixphone() {
-    const inputField = document.getElementById('phone');
-    let digits = inputField.value.replace(/\D/g, "");
-    if (digits.length > 10) digits = digits.slice(0, 10);
-    let formatted = digits;
-    if (digits.length > 6) {
-      formatted = `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
-    } else if (digits.length > 3) {
-      formatted = `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
-    } else if (digits.length > 0) {
-      formatted = `(${digits}`;
-    }
-    inputField.value = formatted;
-  }
-  
-  // Validate phone number is 10 digits
-  function checkPhone() {
-    const input = document.getElementById("phone").value;
-    const digitsOnly = input.replace(/\D/g, "");
-    const errorSpan = document.getElementById("phoneError");
-    if (digitsOnly.length !== 10) {
-      errorSpan.textContent = "Phone number must be exactly 10 digits.";
-    } else {
-      errorSpan.textContent = "";
-    }
-  }
-  
-  // Validate email format
-  function checkEmail() {
-    const field = document.getElementById("email");
-    const error = document.getElementById("emailError");
-    const regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,20}$/i;
-    if (!regex.test(field.value.trim())) {
-      error.textContent = "Enter a valid email in the format name@domain.tld.";
-    } else {
-      error.textContent = "";
-    }
-  }
-  
-  // Validate first name using regex
-  function checkfirstname() {
-    const field = document.getElementById("firstName");
-    const error = document.getElementById("firstNameError");
-    const regex = /^[A-Za-z'-]{1,30}$/;
-    if (!field.value.trim()) {
-      error.textContent = "First name is required.";
-    } else if (!regex.test(field.value)) {
-      error.textContent = "Only letters, apostrophes, and dashes allowed.";
-    } else {
-      error.textContent = "";
-    }
-  }
-  
-  // Validate middle initial
-  function checkmiddleinitial() {
-    const field = document.getElementById("middleInitial");
-    const error = document.getElementById("middleInitialError");
-    const regex = /^[A-Z]?$/;
-    if (field.value && !regex.test(field.value)) {
-      error.textContent = "Middle initial must be a single uppercase letter or left blank.";
-    } else {
-      error.textContent = "";
-    }
-  }
-  
-  // Validate last name using regex
-  function checklastname() {
-    const field = document.getElementById("lastName");
-    const error = document.getElementById("lastNameError");
-    const regex = /^[A-Za-z'-]{1,30}$/;
-    if (!field.value.trim()) {
-      error.textContent = "Last name is required.";
-    } else if (!regex.test(field.value)) {
-      error.textContent = "Only letters, apostrophes, and dashes allowed.";
-    } else {
-      error.textContent = "";
-    }
-  }
-  
-  // Check if DOB is valid
-  function checkDOB() {
-    const field = document.getElementById("dob");
-    const error = document.getElementById("dobError");
-    const value = field.value;
-    if (!value) {
-      error.textContent = "Date of birth is required.";
-      return;
-    }
-    const date = new Date(value);
-    const today = new Date();
-    const oldest = new Date();
-    oldest.setFullYear(today.getFullYear() - 120);
-    if (date > today) {
-      error.textContent = "Date of birth cannot be in the future.";
-    } else if (date < oldest) {
-      error.textContent = "Date of birth cannot be more than 120 years ago.";
-    } else {
-      error.textContent = "";
-    }
-  }
-  
-  // Validate SSN format (9 digits, no dashes)
-  function checkSSN() {
-    const field = document.getElementById("ssn");
-    const error = document.getElementById("ssnError");
-    const regex = /^\d{9}$/;
-    if (!regex.test(field.value)) {
-      error.textContent = "SSN must be exactly 9 digits (no dashes).";
-    } else {
-      error.textContent = "";
-    }
-  }
-  
-  // Validate address line 1
-  function checkAddr1() {
-    const field = document.getElementById("address");
-    const error = document.getElementById("addr1Error");
-    if (!field.value.trim()) {
-      error.textContent = "Address Line 1 is required.";
-    } else {
-      error.textContent = "";
-    }
-  }
-  
-  // Validate optional address line 2 if present
-  function checkAddr2() {
-    const field = document.getElementById("address2");
-    const error = document.getElementById("addr2Error");
-    if (field.value && field.value.trim().length < 2) {
-      error.textContent = "If entered, Address Line 2 must be at least 2 characters.";
-    } else {
-      error.textContent = "";
-    }
-  }
-  
-  // Validate city
-  function checkCity() {
-    const field = document.getElementById("city");
-    const error = document.getElementById("cityError");
-    if (!field.value.trim()) {
-      error.textContent = "City is required.";
-    } else {
-      error.textContent = "";
-    }
-  }
-  
-  // Validate ZIP code format
-  function checkZip() {
-    const field = document.getElementById("zip");
-    const error = document.getElementById("zipError");
-    const regex = /^\d{5}(-\d{4})?$/;
-    if (!regex.test(field.value)) {
-      error.textContent = "Enter a valid ZIP code (12345 or 12345-6789).";
-    } else {
-      error.textContent = "";
-    }
-  }
-  
-  // Update satisfaction slider value
-  function updateSatisfactionValue(slider) {
-    document.getElementById("satisfaction-value").textContent = slider.value;
-    validateSatisfaction();
-  }
-  
-  // Ensure satisfaction slider isn't default
-  function validateSatisfaction() {
-    const value = document.getElementById("satisfaction-slider").value;
-    const error = document.getElementById("satisfactionError");
-    error.textContent = value === "50" ? "Please adjust the slider from default value." : "";
-  }
-  
-  // Handle vaccine logic including "None"
-  function handleVaccineSelection() {
-    const none = document.getElementById("none");
-    const checkboxes = document.querySelectorAll("#vaccines-group input[type='checkbox']");
-    if (event.target === none && none.checked) {
-      checkboxes.forEach(cb => {
-        if (cb !== none) cb.checked = false;
-      });
-    } else if (event.target !== none && event.target.checked) {
-      none.checked = false;
-    }
-    validateVaccines();
-  }
-  
-  // Ensure at least one vaccine is selected
-  function validateVaccines() {
-    const checkboxes = document.querySelectorAll('input[name="vaccines"]');
-    const error = document.getElementById('vaccinesError');
-    const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
-    error.textContent = anyChecked ? "" : "Please select at least one vaccine or 'None of the above'.";
-  }
-  
-  // Validate user ID
-  function validateUserID() {
-    const field = document.getElementById("userID");
-    const error = document.getElementById("userIDError");
-    const regex = /^[A-Za-z][A-Za-z0-9_-]{4,29}$/;
-    if (!regex.test(field.value)) {
-      error.textContent = "User ID must be 5-30 characters, start with a letter, and use only letters, numbers, dash or underscore.";
-    } else {
-      error.textContent = "";
-    }
-  }
-  
-  // Validate password fields
-  function validatePasswords() {
-    const pw1 = document.getElementById("password1");
-    const pw2 = document.getElementById("password2");
-    const error1 = document.getElementById("password1Error");
-    const error2 = document.getElementById("password2Error");
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,30}$/;
-  
-    if (!regex.test(pw1.value)) {
-      error1.textContent = "Password must be 8–30 characters, include upper and lower case, a digit, and a special character.";
-    } else {
-      error1.textContent = "";
-    }
-  
-    if (pw1.value !== pw2.value) {
-      error2.textContent = "Passwords do not match.";
-    } else {
-      error2.textContent = "";
-    }
-  }
-  
-  // Review form data
-  function reviewFormData() {
-    const output = document.getElementById("outputformdata");
-    let review = "PLEASE REVIEW THIS INFORMATION\n\n";
-  
-    const marital = document.querySelector("input[name='marital_status']:checked");
-    const immigration = document.querySelector("input[name='immigration_status']:checked");
-    const race = document.querySelector("input[name='race']:checked");
-    const vaccines = [...document.querySelectorAll("input[name='vaccines']:checked")].map(cb => cb.value).join(", ");
-    const satisfaction = document.getElementById("satisfaction-slider").value;
-  
-    review += `Marital Status: ${marital ? marital.value : "Not selected"}\n`;
-    review += `Immigration Status: ${immigration ? immigration.value : "Not selected"}\n`;
-    review += `Race: ${race ? race.value : "Not selected"}\n`;
-    review += `Vaccinations: ${vaccines || "None selected"}\n`;
-    review += `Satisfaction: ${satisfaction}/100\n`;
-  
-    const firstName = document.getElementById("firstName").value;
-    const middleInitial = document.getElementById("middleInitial").value;
-    const lastName = document.getElementById("lastName").value;
-    const dob = document.getElementById("dob").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-    const address = document.getElementById("address").value;
-    const address2 = document.getElementById("address2").value;
-    const city = document.getElementById("city").value;
-    const state = document.getElementById("state").value;
-    const zip = document.getElementById("zip").value;
-    const fullName = `${firstName} ${middleInitial || ''} ${lastName}`.trim();
-  
-    review += `\nName: ${fullName}\n`;
-    review += `DOB: ${dob}\n`;
-    review += `Email: ${email}\n`;
-    review += `Phone: ${phone}\n`;
-    review += `Address: ${address}`;
-    if (address2) review += `\n         ${address2}`;
-    review += `\n         ${city}, ${state} ${zip}`;
-  
-    const userID = document.getElementById("userID").value;
-    review += `\nUser ID: ${userID}`;
-  
-    output.textContent = review;
+  const date = new Date();
+  document.getElementById("currentDate").textContent = date.toDateString();
+}
 
-    // Cookie helpers
-    function setCookie(name, value, hours) {
-      const date = new Date();
-      date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
-      const expires = "expires=" + date.toUTCString();
-      document.cookie = `${name}=${value}; ${expires}; path=/`;
-    }
+// Format phone
+function fixphone() {
+  const input = document.getElementById('phone');
+  let digits = input.value.replace(/\D/g, "").slice(0, 10);
+  if (digits.length > 6) {
+    input.value = `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  } else if (digits.length > 3) {
+    input.value = `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  } else if (digits.length > 0) {
+    input.value = `(${digits}`;
+  } else {
+    input.value = "";
+  }
+}
 
-    function getCookie(name) {
-      const decodedCookie = decodeURIComponent(document.cookie);
-      const cookies = decodedCookie.split(';');
-      for (let c of cookies) {
-        while (c.charAt(0) === ' ') c = c.substring(1);
-        if (c.indexOf(name + "=") === 0) return c.substring(name.length + 1, c.length);
-      }
-      return "";
-    }
+// Validate phone
+function checkPhone() {
+  const digits = document.getElementById("phone").value.replace(/\D/g, "");
+  document.getElementById("phoneError").textContent = digits.length !== 10 ? "Phone must be 10 digits." : "";
+}
 
-    function deleteCookie(name) {
-      document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    }
+// Email
+function checkEmail() {
+  const email = document.getElementById("email");
+  const error = document.getElementById("emailError");
+  const regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,20}$/i;
+  error.textContent = regex.test(email.value.trim()) ? "" : "Enter a valid email.";
+}
 
-    // Run on load
-    window.onload = function () {
-      displayDate();
-      const firstName = getCookie("firstName");
+// First Name
+function checkfirstname() {
+  const field = document.getElementById("firstName");
+  const error = document.getElementById("firstNameError");
+  if (!field.value.trim()) {
+    error.textContent = "First name required.";
+  } else if (!/^[A-Za-z'-]{1,30}$/.test(field.value)) {
+    error.textContent = "Only letters, apostrophes, dashes.";
+  } else {
+    error.textContent = "";
+  }
+}
 
-      const greeting = document.createElement("p");
-      greeting.style.fontWeight = "bold";
-      if (firstName) {
-        greeting.textContent = `Welcome back, ${firstName}!`;
-        document.getElementById("firstName").value = firstName;
+// Middle Initial
+function checkmiddleinitial() {
+  const field = document.getElementById("middleInitial");
+  const error = document.getElementById("middleInitialError");
+  error.textContent = field.value && !/^[A-Z]?$/.test(field.value) ? "Must be single uppercase letter." : "";
+}
 
-        const resetBox = document.createElement("div");
-        resetBox.innerHTML = `<label><input type="checkbox" id="newUserBox"> Not ${firstName}? Click here to start as a new user.</label>`;
-        document.querySelector("header").appendChild(resetBox);
+// Last Name
+function checklastname() {
+  const field = document.getElementById("lastName");
+  const error = document.getElementById("lastNameError");
+  if (!field.value.trim()) {
+    error.textContent = "Last name required.";
+  } else if (!/^[A-Za-z'-]{1,30}$/.test(field.value)) {
+    error.textContent = "Only letters, apostrophes, dashes.";
+  } else {
+    error.textContent = "";
+  }
+}
 
-        document.getElementById("newUserBox").addEventListener("change", function () {
-          if (this.checked) {
-            deleteCookie("firstName");
-            document.getElementById("registration-form").reset();
-            document.getElementById("firstName").value = "";
-            alert("Cookie cleared. You can now enter a new name.");
-          }
-        });
+// DOB
+function checkDOB() {
+  const field = document.getElementById("dob");
+  const error = document.getElementById("dobError");
+  const date = new Date(field.value);
+  const today = new Date();
+  const oldest = new Date(today.getFullYear() - 120, 0);
+  if (!field.value) {
+    error.textContent = "DOB required.";
+  } else if (date > today) {
+    error.textContent = "DOB cannot be in future.";
+  } else if (date < oldest) {
+    error.textContent = "DOB cannot be over 120 years ago.";
+  } else {
+    error.textContent = "";
+  }
+}
 
-      } else {
-        greeting.textContent = "Welcome new user!";
-      }
-      document.querySelector("header").appendChild(greeting);
-    };
+// SSN
+function checkSSN() {
+  const field = document.getElementById("ssn");
+  const error = document.getElementById("ssnError");
+  error.textContent = /^\d{9}$/.test(field.value) ? "" : "SSN must be 9 digits.";
+}
 
-    // Save name if "Remember Me" is checked
-    function maybeSaveName() {
-      const remember = document.getElementById("rememberMe");
-      const name = document.getElementById("firstName").value;
-      if (remember && remember.checked) {
-        setCookie("firstName", name, 48);
-      } else {
-        deleteCookie("firstName");
-      }
-    }
-  }  
+// Address
+function checkAddr1() {
+  const field = document.getElementById("address");
+  const error = document.getElementById("addr1Error");
+  error.textContent = !field.value.trim() ? "Address Line 1 required." : "";
+}
+
+function checkAddr2() {
+  const field = document.getElementById("address2");
+  const error = document.getElementById("addr2Error");
+  error.textContent = field.value && field.value.trim().length < 2 ? "If used, must be 2+ characters." : "";
+}
+
+// City / ZIP
+function checkCity() {
+  const field = document.getElementById("city");
+  const error = document.getElementById("cityError");
+  error.textContent = !field.value.trim() ? "City required." : "";
+}
+
+function checkZip() {
+  const field = document.getElementById("zip");
+  const error = document.getElementById("zipError");
+  error.textContent = /^\d{5}(-\d{4})?$/.test(field.value) ? "" : "Enter valid ZIP.";
+}
+
+// Satisfaction
+function updateSatisfactionValue(slider) {
+  document.getElementById("satisfaction-value").textContent = slider.value;
+  validateSatisfaction();
+}
+
+function validateSatisfaction() {
+  const value = document.getElementById("satisfaction-slider").value;
+  document.getElementById("satisfactionError").textContent = value === "50" ? "Adjust slider." : "";
+}
+
+// Vaccines
+function handleVaccineSelection() {
+  const none = document.getElementById("none");
+  const boxes = document.querySelectorAll("#vaccines-group input[type='checkbox']");
+  if (event.target === none && none.checked) {
+    boxes.forEach(b => { if (b !== none) b.checked = false; });
+  } else if (event.target !== none && event.target.checked) {
+    none.checked = false;
+  }
+  validateVaccines();
+}
+
+function validateVaccines() {
+  const boxes = document.querySelectorAll('input[name="vaccines"]');
+  const anyChecked = Array.from(boxes).some(cb => cb.checked);
+  document.getElementById("vaccinesError").textContent = anyChecked ? "" : "Select at least one or 'None'.";
+}
+
+// User ID / Passwords
+function validateUserID() {
+  const field = document.getElementById("userID");
+  const error = document.getElementById("userIDError");
+  error.textContent = /^[A-Za-z][A-Za-z0-9_-]{4,29}$/.test(field.value) ? "" : "5–30 chars, start with letter, A-Z, 0-9, -, _";
+}
+
+function validatePasswords() {
+  const pw1 = document.getElementById("password1");
+  const pw2 = document.getElementById("password2");
+  const e1 = document.getElementById("password1Error");
+  const e2 = document.getElementById("password2Error");
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,30}$/;
+  e1.textContent = regex.test(pw1.value) ? "" : "8–30 chars, upper/lower, digit, special.";
+  e2.textContent = pw1.value === pw2.value ? "" : "Passwords do not match.";
+}
+
+// Cookies
+function setCookie(name, value, hours) {
+  const date = new Date();
+  date.setTime(date.getTime() + (hours * 3600000));
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${date.toUTCString()}; path=/`;
+}
+
+function getCookie(name) {
+  return document.cookie.split("; ").reduce((acc, c) => {
+    const [k, v] = c.split("=");
+    return k === name ? decodeURIComponent(v) : acc;
+  }, "");
+}
+
+function deleteCookie(name) {
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
+
+// Welcome
+function showWelcomeMessage() {
+  const name = getCookie("firstName");
+  const header = document.querySelector("header");
+  const msg = document.createElement("p");
+  msg.style.fontWeight = "bold";
+  msg.textContent = name ? `Welcome back, ${name}!` : "Welcome, New User!";
+  header.appendChild(msg);
+
+  if (name) {
+    document.getElementById("firstName").value = name;
+    const div = document.createElement("div");
+    div.innerHTML = `<label><input type="checkbox" id="newUserBox"> Not ${name}? Start as new user.</label>`;
+    header.appendChild(div);
+    document.getElementById("newUserBox").addEventListener("change", () => {
+      deleteCookie("firstName");
+      document.getElementById("registration-form").reset();
+      document.getElementById("firstName").value = "";
+      alert("Cookie cleared.");
+      location.reload();
+    });
+  }
+}
+
+function maybeSaveName() {
+  const remember = document.getElementById("rememberMe");
+  const name = document.getElementById("firstName").value.trim();
+  if (remember && remember.checked && name) {
+    setCookie("firstName", name, 48);
+  } else {
+    deleteCookie("firstName");
+  }
+}
+
+function handleSubmit() {
+  maybeSaveName();
+  window.location.href = "thank-you.html";
+}
+
+function reviewFormData() {
+  const form = document.getElementById("registration-form");
+  const output = document.getElementById("outputformdata");
+  const data = new FormData(form);
+  let r = "PLEASE REVIEW THIS INFORMATION\n\n";
+
+  const get = id => document.getElementById(id).value;
+  r += `Marital Status: ${data.get("marital_status") || "Not selected"}\n`;
+  r += `Immigration Status: ${data.get("immigration_status") || "Not selected"}\n`;
+  r += `Race: ${data.get("race") || "Not selected"}\n`;
+  r += `Vaccinations: ${data.getAll("vaccines").join(", ") || "None selected"}\n`;
+  r += `Satisfaction: ${get("satisfaction-slider")}/100\n`;
+  r += `\nName: ${get("firstName")} ${get("middleInitial")} ${get("lastName")}\n`;
+  r += `DOB: ${get("dob")}\nEmail: ${get("email")}\nPhone: ${get("phone")}\n`;
+  r += `Address: ${get("address")}\n         ${get("address2")}\n         ${get("city")}, ${get("state")} ${get("zip")}\n`;
+  r += `User ID: ${get("userID")}`;
+  output.textContent = r;
+}
+
+// Init
+window.onload = function () {
+  displayDate();
+  showWelcomeMessage();
+};
